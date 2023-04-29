@@ -11,10 +11,10 @@ class kitchenScaleTest extends TestCase{
 
     /**
      * @test
-     * @dataProvider 適切な重さを設定する用データ
+     * @dataProvider 重さを表示用データ
      * @param $weight
      */
-    public function 適切な重さを設定する(
+    public function 重さを表示(
         float $weight,
         String $expectedMessage,
     ) {
@@ -23,7 +23,7 @@ class kitchenScaleTest extends TestCase{
         $this->assertEquals($expectedMessage, $kitchenScale->getMessage());
     }
 
-    public static function 適切な重さを設定する用データ() {
+    public static function 重さを表示用データ() {
         return [
             [-1000, 'EEEE'],
             [-1, 'EEEE'],

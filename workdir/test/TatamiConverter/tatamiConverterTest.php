@@ -11,10 +11,10 @@ class tatamiConverterTest extends TestCase{
 
     /**
      * @test
-     * @dataProvider 適切な畳数を設定する用データ
+     * @dataProvider 畳数から面積を計算用データ
      * @param $weight
      */
-    public function 適切な畳数を設定する(
+    public function 畳数から面積を計算(
         int $tatamiNum,
         String $expectedArea,
     ) {
@@ -32,7 +32,7 @@ class tatamiConverterTest extends TestCase{
         $this->assertEquals($expectedArea, $area);
     }
 
-    public static function 適切な畳数を設定する用データ() {
+    public static function 畳数から面積を計算用データ() {
         return [
             [-200, '-'],
             [-129, '-'],

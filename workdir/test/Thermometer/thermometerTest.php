@@ -11,10 +11,10 @@ class thermometerTest extends TestCase{
 
     /**
      * @test
-     * @dataProvider 適切な気温を設定する用データ
+     * @dataProvider 気温からステータスを表示用データ
      * @param $temperature
      */
-    public function 適切な気温を設定する(
+    public function 気温からステータスを表示(
         float $temperature,
         String $expectedMessage,
     ) {
@@ -23,7 +23,7 @@ class thermometerTest extends TestCase{
         $this->assertEquals($expectedMessage, $thermometer->getMessage());
     }
 
-    public static function 適切な気温を設定する用データ() {
+    public static function 気温からステータスを表示用データ() {
         return [
             [23.0, '寒い'],
             [23.9, '寒い'],

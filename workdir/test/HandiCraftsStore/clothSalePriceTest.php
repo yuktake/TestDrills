@@ -11,9 +11,9 @@ class clothSalePriceTest extends TestCase{
 
     /**
      * @test
-     * @dataProvider 適切な長さを設定する用データ
+     * @dataProvider 生地の長さから販売価格を計算用データ
      */
-    public function 適切な長さを設定する(
+    public function 生地の長さから販売価格を計算(
         float $length,
         $expectedValue,
     ) {
@@ -28,7 +28,7 @@ class clothSalePriceTest extends TestCase{
         $this->assertEquals($expectedValue, $price);
     }
 
-    public static function 適切な長さを設定する用データ() {
+    public static function 生地の長さから販売価格を計算用データ() {
         return [
             [0.0, '-'],
             [0.1, 40],

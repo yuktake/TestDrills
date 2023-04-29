@@ -11,17 +11,17 @@ class admissionFeeTest extends TestCase{
 
     /**
      * @test
-     * @dataProvider 適切な年齢を設定する用データ
+     * @dataProvider 年齢別の入場料を取得用データ
      */
-    public function 適切な重さを設定する(
+    public function 年齢別の入場料を取得(
         int $age,
         $expectedValue,
     ) {
         $admissionFee = null;
 
         try {
-            $admissonFeeEntity = new AdmissionFee($age);
-            $admissionFee = $admissonFeeEntity->getFee();
+            $admissonFeeValueObject = new AdmissionFee($age);
+            $admissionFee = $admissonFeeValueObject->getFee();
         }catch(\InvalidArgumentException $e) {
             $admissionFee = $e->getMessage();
         }
@@ -29,7 +29,7 @@ class admissionFeeTest extends TestCase{
         $this->assertEquals($expectedValue, $admissionFee);
     }
 
-    public static function 適切な年齢を設定する用データ() {
+    public static function 年齢別の入場料を取得用データ() {
         return [
             [-10, '-'],
             [-1, '-'],
