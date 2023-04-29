@@ -1,0 +1,7 @@
+version: '3'
+services:
+  php:
+    container_name: php-for-test
+    build: ./settings
+    volumes:
+        - ./workdir:/var/www
