@@ -3,9 +3,7 @@ namespace App\Bmi;
 
 use App\Bmi\Enums\NutritionalStatus;
 
-class Bmi {
-
-    private float $value;
+class BmiStatus {
 
     private NutritionalStatus $nutritionalStatus;
 
@@ -33,8 +31,6 @@ class Bmi {
         } else {
             $this->nutritionalStatus = NutritionalStatus::OBESITY_3;
         }
-
-        $this->value = $roundingDownBmi;
     }
 
     public function getValue():float {

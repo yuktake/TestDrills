@@ -1,6 +1,6 @@
 <?php
 
-use App\Bmi\Bmi;
+use App\Bmi\BmiStatus;
 use PHPUnit\Framework\TestCase;
 
 class BmiTest extends TestCase{
@@ -19,7 +19,7 @@ class BmiTest extends TestCase{
     ) {
         $status = null;
         try {
-            $bmi = new Bmi($bmi);
+            $bmi = new BmiStatus($bmi);
             $status = $bmi->getNutritionalStatus();
         } catch(\Exception $e) {
             $status = $e->getMessage();
