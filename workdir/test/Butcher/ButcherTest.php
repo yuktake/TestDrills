@@ -12,9 +12,9 @@ class ButcherTest extends TestCase{
 
     /**
      * @test
-     * @dataProvider 日付による買い物金額の割引用データ
+     * @dataProvider １日から５日に買い物すると２割引になる用データ
      */
-    public function 日付による買い物金額の割引(
+    public function １日から５日に買い物すると２割引になる(
         \DateTimeImmutable $orderAt,
         int $expectedPrice,
     ) {
@@ -26,7 +26,23 @@ class ButcherTest extends TestCase{
         $this->assertEquals($expectedPrice, $order->getTotalPrice());
     }
 
-    public static function 日付による買い物金額の割引用データ() {
+    /**
+     * @test
+     * @dataProvider ２８日から３０日に買い物すると２割引になる用データ
+     */
+    public function ２８日から３０日に買い物すると２割引になる(
+        \DateTimeImmutable $orderAt,
+        int $expectedPrice,
+    ) {
+        $order = new Order(
+            1000,
+            new OrderDate($orderAt),
+        );
+
+        $this->assertEquals($expectedPrice, $order->getTotalPrice());
+    }
+
+    public static function １日から５日に買い物すると２割引になる用データ() {
         return [
             '1日に購入' => [
                 \DateTimeImmutable::createFromFormat('Y-m-d', '2023-01-01'),
@@ -40,17 +56,19 @@ class ButcherTest extends TestCase{
                 \DateTimeImmutable::createFromFormat('Y-m-d', '2023-01-05'),
                 800,
             ],
-            // error
             '6日に購入' => [
                 \DateTimeImmutable::createFromFormat('Y-m-d', '2023-01-06'),
                 1000,
             ],
-            // error
             '20日に購入' => [
                 \DateTimeImmutable::createFromFormat('Y-m-d', '2023-01-20'),
                 1000,
             ],
-            // error
+        ];
+    }
+
+    public static function ２８日から３０日に買い物すると２割引になる用データ() {
+        return [
             '27日に購入' => [
                 \DateTimeImmutable::createFromFormat('Y-m-d', '2023-01-27'),
                 1000,
@@ -67,7 +85,6 @@ class ButcherTest extends TestCase{
                 \DateTimeImmutable::createFromFormat('Y-m-d', '2023-01-30'),
                 800,
             ],
-            // error
             '31日に購入' => [
                 \DateTimeImmutable::createFromFormat('Y-m-d', '2023-01-31'),
                 1000,
