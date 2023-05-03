@@ -2,6 +2,6 @@ version: '3'
 services:
   php:
     container_name: php-for-test
-    build: ./settings
+    build: ./php
     volumes:
         - ./workdir:/var/www
