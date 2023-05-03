@@ -4,7 +4,7 @@ use App\Butcher\Order;
 use App\Butcher\OrderDate;
 use PHPUnit\Framework\TestCase;
 
-class ButcherTest extends TestCase{
+class OrderTest extends TestCase{
 
     protected function setUp() :void {
         
