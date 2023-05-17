@@ -2,8 +2,6 @@
 namespace App\Beer\Domain\Coupon;
 
 use App\Beer\Domain\Order;
-use App\Beer\Enums\CouponTarget;
-use App\Beer\Enums\DiscountType;
 
 class Coupon implements CouponInterface {
 
@@ -61,16 +59,6 @@ class Coupon implements CouponInterface {
     public function getUseLimitByCustomer(): ?int
     {
         return $this->useLimitByCustomer;
-    }
-
-    public function getCouponTarget(): CouponTarget
-    {
-        return CouponTarget::PRODUCT_CODE;
-    }
-
-    public function getDiscountType(): DiscountType
-    {
-        return DiscountType::SPECIFIC_PRICE;
     }
 
     public function isAvailable(): bool
