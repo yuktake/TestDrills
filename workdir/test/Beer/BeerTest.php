@@ -26,9 +26,9 @@ class BeerTest extends TestCase{
 
     /**
      * @test
-     * @dataProvider クーポンを適用する用データ
+     * @dataProvider クーポンを使うまたはハッピーアワーだと割引になる用データ
      */
-    public function クーポンを適用する(
+    public function クーポンを使うまたはハッピーアワーだと割引になる(
         \DateTimeImmutable $orderAt,
         bool $useCoupon,
         int $expectedPrice,
@@ -86,7 +86,7 @@ class BeerTest extends TestCase{
         return $beerCoupon;
     }
 
-    public static function クーポンを適用する用データ() {
+    public static function クーポンを使うまたはハッピーアワーだと割引になる用データ() {
         return [
             'ハッピーアワーではなくクーポンは使わない' => [
                 \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', date('Y-m-d').' 20:00:00'),
