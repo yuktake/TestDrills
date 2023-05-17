@@ -20,12 +20,12 @@ class OrderDomainService {
 
         // Couponの使用回数が決まっている場合
         if (!is_null($coupon->getUseLimit())) {
-            
+            return false;
         }
 
         // ユーザごとにCouponの使用回数が決まっている場合
         if (!is_null($coupon->getUseLimitByCustomer())) {
-            
+            return false;
         }
     
         return $coupon->isApplicable($order);
