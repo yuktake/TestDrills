@@ -5,14 +5,17 @@ use App\Beer\Domain\Discount;
 use App\Beer\Domain\Money;
 use App\Beer\Domain\Order;
 
-class TotalPriceDiscountSpecification implements CouponSpecificationInterface {
+class TotalPriceDiscountRatioSpecification implements CouponSpecificationInterface {
 
-    private int $discountAmount;
+    private float $discountRatio;
 
     public function __construct(
-        int $discountAmount,
+        float $discountRatio,
     ) {
-        $this->discountAmount = $discountAmount;
+        if($discountRatio <= 0.0 || $discountRatio >= 1.0) {
+            throw new \Exception('does not discount');
+        }
+        $this->discountRatio = $discountRatio;
     }
 
     public function apply(Order $order): Order
@@ -20,21 +23,21 @@ class TotalPriceDiscountSpecification implements CouponSpecificationInterface {
         $discounts = $order->getDiscounts();
         $discount = new Discount(
             null, 
-            new Money($this->discountAmount), 
-            'total price is discounted'
+            new Money($order->getPrice() * $this->discountRatio), 
+            'total price is discounted by ratio'
         );
         $discounts->add($discount);
 
         $appliedOrder = new Order(
             $order->getId(),
-            $order->getPrice() - $this->discountAmount,
+            $order->getPrice() - ($order->getPrice() * $this->discountRatio) ,
             $order->getCustomer(),
             $order->getOrderDetails(),
             $discounts,
             $order->getCoupons(),
             $order->getDeliveryFee(),
         );
-        // var_dump('TotalPriceDiscountSpecification');
+        // var_dump('TotalPriceDiscountRatioSpecification');
         // var_dump($appliedOrder->getPrice());
 
         return $appliedOrder;

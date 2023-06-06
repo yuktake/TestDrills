@@ -4,6 +4,7 @@ namespace App\Beer\DomainService;
 use App\Beer\Domain\Coupons;
 use App\Beer\Domain\Order;
 use App\Beer\Domain\Coupon\CouponInterface;
+use App\Beer\Domain\Discounts;
 
 class OrderDomainService {
 
@@ -46,8 +47,17 @@ class OrderDomainService {
         $combinations = $this->permutation($coupons, count($coupons));
         // クーポンの適用順で最も最小金額になる組み合わせを探す
         foreach ($combinations as $coupons) {
+            $beforeDiscountedPriceOrder = new Order(
+                $order->getId(),
+                $order->getPriceBeforeDiscount(),
+                $order->getCustomer(),
+                $order->getOrderDetails(),
+                new Discounts([]),
+                $order->getCoupons(),
+                $order->getDeliveryFee(),
+            );
             $couponCollection = new Coupons($coupons);
-            $appliedOrder = $couponCollection->apply($order);
+            $appliedOrder = $couponCollection->apply($beforeDiscountedPriceOrder);
             $orders[] = $appliedOrder;
         }
         // 最小注文金額のOrderを返す

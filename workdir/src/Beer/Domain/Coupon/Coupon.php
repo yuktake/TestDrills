@@ -41,6 +41,10 @@ class Coupon implements CouponInterface {
         return $this->id;
     }
 
+    public function getCode():string {
+        return $this->couponCode;
+    }
+
     public function isApplicable(Order $order): bool {
         return $this->conditions->appliable($order);
     }

@@ -25,7 +25,7 @@ class Coupons {
 
     public function hasCoupon(CouponInterface $targetCoupon):bool {
         foreach($this->coupons as $coupon) {
-            if ($coupon->getId() == $targetCoupon->getId()) {
+            if ($coupon->getCode() == $targetCoupon->getCode()) {
                 return true;
             }
         }

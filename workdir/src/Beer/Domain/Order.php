@@ -13,6 +13,8 @@ class Order {
 
     private OrderDetails $orderDetails;
 
+    private Discounts $discounts;
+
     private Coupons $coupons;
 
     private DeliveryFee $deliveryFee;
@@ -22,6 +24,7 @@ class Order {
         int $price,
         Customer $customer,
         OrderDetails $orderDetails,
+        Discounts $discounts,
         Coupons $coupons,
         DeliveryFee $deliveryFee,
     ) {
@@ -29,6 +32,7 @@ class Order {
         $this->price = new Money($price);
         $this->customer = $customer;
         $this->orderDetails = $orderDetails;
+        $this->discounts = $discounts;
         $this->coupons = $coupons;
         $this->deliveryFee = $deliveryFee;
     }
@@ -37,8 +41,19 @@ class Order {
         return $this->id;
     }
 
+    // 割引後の金額
     public function getPrice():int {
         return $this->price->getValue();
+    }
+
+    // 割引・クーポン適用前の金額(表示用)
+    public function getPriceBeforeDiscount():int {
+        $discountSum = 0;
+        foreach($this->discounts->asArray() as $discount) {
+            $discountSum+=$discount->getPrice();
+        }
+
+        return $this->getPrice() + $discountSum;
     }
 
     public function getTotalPrice():int {
@@ -51,6 +66,10 @@ class Order {
 
     public function getOrderDetails(): OrderDetails {
         return $this->orderDetails;
+    }
+
+    public function getDiscounts(): Discounts {
+        return $this->discounts;
     }
 
     public function getCoupons():Coupons {

@@ -9,16 +9,20 @@ class OrderDetail {
 
     private Money $price;
 
+    private Discounts $discounts;
+
     private Product $product;
 
     public function __construct(
         ?int $id,
         int $price,
+        Discounts $discounts,
         Product $product,
     ) {
         $this->id = $id;
         $this->uuid = uniqid();
         $this->price = new Money($price);
+        $this->discounts = $discounts;
         $this->product = $product;
     }
 
@@ -32,6 +36,10 @@ class OrderDetail {
 
     public function getPrice(): int {
         return $this->price->getValue();
+    }
+
+    public function getDiscounts():Discounts {
+        return $this->discounts;
     }
 
     public function getProduct():Product {
