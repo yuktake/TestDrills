@@ -21,7 +21,7 @@ class OrderDomainService {
 
         // Couponの使用回数が決まっている場合
         if (!is_null($coupon->getUseLimit())) {
-            return false;
+            // TODO:: Repositoryから使用履歴を確認して判別する
         }
 
         // ユーザごとにCouponの使用回数が決まっている場合

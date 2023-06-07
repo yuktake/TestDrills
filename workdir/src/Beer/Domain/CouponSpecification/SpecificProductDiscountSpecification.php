@@ -67,8 +67,6 @@ class SpecificProductDiscountSpecification implements CouponSpecificationInterfa
             $order->getCoupons(),
             $order->getDeliveryFee(),
         );
-        // var_dump('SpecificProductDiscountSpecification');
-        // var_dump($appliedOrder->getPrice());
 
         return $appliedOrder;
     }
